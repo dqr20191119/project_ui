@@ -1,0 +1,30 @@
+.tab-div{
+    width: 3.3rem;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    background: rgba(255,255,255,0.9600);
+    border: 0.0125rem solid #E6EFFA;
+    box-shadow: 0 0.125rem 0.25rem 0.0125rem rgba(138,144,153,0.4);
+    border-radius: 0.1rem;
+    opacity: 1;
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 10000;
+    .tab-item{
+        height: 0.45rem;
+        line-height: 0.45rem;
+        border-radius: 0.05rem;
+        padding: 0 0.25rem;
+        color: #646566;
+        cursor: pointer;
+        font-size: 0.2rem;
+    }
+    .isActive{
+        color: #FFFFFF;    
+        background: #004AB3;
+    }
+}

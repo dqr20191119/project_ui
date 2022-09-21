@@ -1,0 +1,47 @@
+.ol-popup {
+    position: absolute;
+    width: 3.75rem;
+    opacity: 1;
+    bottom: 0;
+    min-height: 3.125rem;
+    left: -1.8625rem;
+    padding: 0.15rem 0.3125rem 0.625rem 0.3125rem;
+    background: url(~@/assets/images/pop_up_bg.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .ol-popup2 {
+    position: absolute;
+    width: 4.75rem;
+    bottom: 0;
+    min-height: 3.5rem;
+    left: -2.3625rem;
+    padding: 0.0625rem 0.3125rem 0.625rem 0.3125rem;
+    background: url(~@/assets/images/pop_up_bg2.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .ol-popup-closer {
+    background: url(~@/assets/images/close.png) no-repeat;
+    text-decoration: none;
+    position: absolute;
+    top: 0.3125rem;
+    width: 0.2rem;
+    height: 0.2rem;
+    background-size: cover;
+    right: 0.3125rem;
+    z-index: 2000;
+    color: white;
+    font-weight: bold;
+  }
+  .ol-popup-closer2 {
+    background: url(~@/assets/images/close.png) no-repeat;
+    text-decoration: none;
+    position: absolute;
+    top: 0.45rem;
+    width: 0.2rem;
+    height: 0.2rem;
+    background-size: cover;
+    right: 0.3125rem;
+    z-index: 2000;
+    color: white;
+    font-weight: bold;
+  }

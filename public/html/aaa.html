@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <style>
+    html,
+    body,
+    #container {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <title>折线的绘制和编辑</title>
+  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+  <script src="https://webapi.amap.com/maps?v=2.0&key=966498bb920cfd9f65b485c3e4cac310&plugin=AMap.PolylineEditor"></script>
+  <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript">
+  var map = new AMap.Map("container", {
+    resizeEnable: true,
+    center: [119.649506,29.089524],
+    zoom: 13,
+    viewMode:'3D'
+  });
+
+  var pipelineDataList = [
+    {
+      path:[new AMap.LngLat(118.87,28.93),new AMap.LngLat(119.649506,29.089524)],
+      data:'衢州站至金华站'
+    },
+    {
+      path:[new AMap.LngLat(119.649506,29.089524),new AMap.LngLat(120.23629,29.71358)],
+      data:'金华站至诸暨站'
+    },
+    {
+      path:[new AMap.LngLat(120.23629,29.71358),new AMap.LngLat(120.27,30.17)],
+      data:'诸暨站至萧山站'
+    }
+  ]
+
+  var path = [
+    [116.362209, 39.887487],
+    [116.422897, 39.878002],
+    [116.372105, 39.90651],
+    [116.428945, 39.89663]
+  ];
+
+  var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+  for (var i=0;i<this.pipelineDataList.length;i++){
+    //创建折线对象，extData为折线的自定义数据
+    var polyline=new AMap.Polyline({
+      path:this.pipelineDataList[i].path,
+      strokeWeight: 6,
+      strokeColor: '#3366FF',
+      isOutline: true,
+      borderWeight: 1,
+      outlineColor: '#ffeeff',
+      extData:{
+        data:this.pipelineDataList[i].data
+      }
+    });
+    //折线指定父地图对象
+    polyline.setMap(map);
+    //给折线绑定点击事件
+    polyline.on('click', polylineClick);
+  }
+
+  function polylineClick(e){
+    console.log(e);
+    console.log(e.target._opts.extData);
+    var position=[];
+    position.push(e.lnglat.lng);
+    position.push(e.lnglat.lat);
+    //创建信息窗体
+    infoWindow = new AMap.InfoWindow({
+      content:'<div>id:'+e.target._opts.extData.data+'</div><br/>'
+    });
+    infoWindow.open(map, position);
+  }
+
+</script>
+</body>
+</html>
