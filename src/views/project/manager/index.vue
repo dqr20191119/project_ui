@@ -56,8 +56,8 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="工程造价" align="center" prop="projectCost" />
-      <el-table-column label="工可编织单位" align="center" prop="remark" />
+      <el-table-column label="工程造价" align="center" prop="projectCostStr" />
+      <el-table-column label="工可编织单位" align="center" prop="deptOrganizationName" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -255,7 +255,7 @@
           <el-input v-model="form.shortName" placeholder="请输入项目简称" readonly/>
         </el-form-item>
         <el-form-item label="工程类别" prop="projectClass">
-          <el-select v-model="form.projectClass" placeholder="请选择" aria-readonly="true">
+          <el-select v-model="form.projectClass" placeholder="请选择" disabled >
             <el-option
               v-for="dict in dict.type.sys_project_class"
               :key="dict.value"
@@ -265,16 +265,16 @@
           </el-select>
         </el-form-item>
         <el-form-item label="所属地区" prop="area">
-          <el-cascader :options="areaOptions" clearable aria-readonly="true"></el-cascader>
+          <el-cascader :options="areaOptions" clearable disabled ></el-cascader>
         </el-form-item>
         <el-form-item label="立项编码" prop="projectCode">
           <el-input v-model="form.projectCode" placeholder="请输入立项编码" readonly/>
         </el-form-item>
         <el-form-item label="排序" prop="orderNum">
-          <el-input-number v-model="form.orderNum" controls-position="right" :min="0" readonly/>
+          <el-input-number v-model="form.orderNum" controls-position="right" :min="0" disabled />
         </el-form-item>
         <el-form-item label="业主管理单位" prop="deptManager">
-          <el-select v-model="form.deptManager" multiple placeholder="请选择">
+          <el-select v-model="form.deptManager" multiple  disabled >
             <el-option
               v-for="item in deptManagerOptions"
               :key="item.value"
@@ -284,7 +284,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="项目总承包单位" prop="deptContracting">
-          <el-select v-model="form.deptContracting" multiple placeholder="请选择">
+          <el-select v-model="form.deptContracting" multiple disabled >
             <el-option
               v-for="item in deptContractingOptions"
               :key="item.value"
@@ -294,7 +294,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="项目咨询单位" prop="deptConsult">
-          <el-select v-model="form.deptConsult" multiple placeholder="请选择">
+          <el-select v-model="form.deptConsult" multiple disabled >
             <el-option
               v-for="item in deptConsultOptions"
               :key="item.value"
@@ -304,7 +304,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="工可编织单位" prop="deptOrganization">
-          <el-select v-model="form.deptOrganization" multiple placeholder="请选择">
+          <el-select v-model="form.deptOrganization" multiple disabled >
             <el-option
               v-for="item in deptOrganizationOptions"
               :key="item.value"
@@ -314,7 +314,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="项目建设单位" prop="deptBuild">
-          <el-select v-model="form.deptBuild" multiple placeholder="请选择">
+          <el-select v-model="form.deptBuild" multiple disabled >
             <el-option
               v-for="item in deptBuildOptions"
               :key="item.value"
@@ -324,7 +324,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="项目勘察单位" prop="deptSurvey">
-          <el-select v-model="form.deptSurvey" multiple placeholder="请选择">
+          <el-select v-model="form.deptSurvey" multiple disabled >
             <el-option
               v-for="item in deptSurveyOptions"
               :key="item.value"
@@ -334,7 +334,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="项目设计单位" prop="deptDesign">
-          <el-select v-model="form.deptDesign" multiple placeholder="请选择">
+          <el-select v-model="form.deptDesign" multiple disabled >
             <el-option
               v-for="item in deptDesignOptions"
               :key="item.value"
@@ -344,7 +344,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="项目施工单位" prop="deptConstruction">
-          <el-select v-model="form.deptConstruction" multiple placeholder="请选择">
+          <el-select v-model="form.deptConstruction" multiple disabled >
             <el-option
               v-for="item in deptConstructionOptions"
               :key="item.value"
@@ -354,7 +354,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="项目监理单位" prop="deptSupervisor">
-          <el-select v-model="form.deptSupervisor" multiple placeholder="请选择">
+          <el-select v-model="form.deptSupervisor" multiple disabled >
             <el-option
               v-for="item in deptSupervisorOptions"
               :key="item.value"
@@ -364,7 +364,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="项目其他单位" prop="deptOthers">
-          <el-select v-model="form.deptOthers" multiple placeholder="请选择">
+          <el-select v-model="form.deptOthers" multiple disabled >
             <el-option
               v-for="item in deptOthersOptions"
               :key="item.value"
@@ -382,7 +382,7 @@
 </template>
 
 <script>
-import { listManager, getManager, delManager, addManager, updateManager,saveManager } from "@/api/project/manager/manager";
+import { listManager, getManager, delManager, addManager, updateManager,saveManager,cityList } from "@/api/project/manager/manager";
 import { listDept} from "@/api/system/dept";
 export default {
   name: "Manager",
@@ -413,6 +413,7 @@ export default {
       deptConstructionOptions:[],
       deptSupervisorOptions:[],
       deptOthersOptions:[],
+      areaOptions: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -457,6 +458,13 @@ export default {
       listManager(this.queryParams).then(response => {
         this.managerList = response.rows;
         this.total = response.total;
+        this.loading = false;
+      });
+    },
+    cityList() {
+      this.loading = true;
+      cityList().then(response => {
+        this.areaOptions = response.data;
         this.loading = false;
       });
     },
@@ -542,6 +550,17 @@ export default {
         updateTime: null,
         delFlag: null
       };
+
+      this.deptManagerOptions=[];
+      this.deptContractingOptions=[];
+      this.deptConsultOptions=[];
+      this.deptOrganizationOptions=[];
+      this.deptBuildOptions=[];
+      this.deptSurveyOptions=[];
+      this.deptDesignOptions=[];
+      this.deptConstructionOptions=[];
+      this.deptSupervisorOptions=[];
+      this.deptOthersOptions=[];
       this.resetForm("form");
     },
     /** 搜索按钮操作 */
@@ -564,6 +583,7 @@ export default {
     handleAdd() {
       this.reset();
       this.deptList();
+      this.cityList();
       this.open = true;
       this.title = "项目-新增";
     },

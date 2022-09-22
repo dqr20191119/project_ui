@@ -27,6 +27,12 @@ export function addManager(data) {
 }
 
 
+export function cityList() {
+  return request({
+    url: '/system/city/cityList',
+    method: 'get'
+  })
+}
 // 保存项目管理
 export function saveManager(data) {
   return request({
